@@ -5,8 +5,6 @@ pragma solidity 0.8.34;
 import "../lib/openzeppelin-contracts/contracts/access/Ownable.sol";
 import "../lib/openzeppelin-contracts/contracts/token/ERC20/IERC20.sol";
 
-//Staking given amount. E.g: 10
-//Staking reward period
 contract StakingApp is Ownable {
 
     //Variables
@@ -46,10 +44,10 @@ contract StakingApp is Ownable {
     }
 
     //2. Withdraw
-    function withdrawTokens() external {  // CEI Pattern
-    uint256 userBalance_ = userBalance[msg.sender]; //Guardar primero el balance del usuario
-    userBalance[msg.sender] = 0;                     // luego atualizar a cero para que no haya reentrancy
-    IERC20(stakingToken).transfer(msg.sender, userBalance_); //Luego transferir el balance al usuario
+    function withdrawTokens() external {  
+    uint256 userBalance_ = userBalance[msg.sender]; 
+    userBalance[msg.sender] = 0;                     
+    IERC20(stakingToken).transfer(msg.sender, userBalance_); 
     
     emit WithdrawTokens(msg.sender, userBalance_);
     }
@@ -80,20 +78,6 @@ contract StakingApp is Ownable {
         stakingPeriod = newStakingPeriod_;
         emit ChangeStakingPeriod(newStakingPeriod_);
     }
-
-
-
-    //Internal
-
-
-
-
-
-
-
-
-
-
 
 
 }
